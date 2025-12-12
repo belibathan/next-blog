@@ -5,13 +5,11 @@ import type { Metadata } from 'next'
 import { allArticles } from 'contentlayer/generated'
 import { MDXContent } from '@/components/mdx/content'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { ChevronLeft, ChevronRight, Clock } from 'lucide-react'
 import { getAuthorName } from '@/lib/get-author'
 import { RelatedArticles } from '@/components/related-articles'
 import { ShareButtons } from '@/components/share-buttons'
-import { NewsletterSignup } from '@/components/newsletter-signup'
 import { ReadProgress } from '@/components/read-progress'
 
 export function generateStaticParams() {
@@ -35,7 +33,7 @@ export async function generateMetadata({
 	}
 
 	return {
-		title: `${article.title} - Welch Daily`,
+		title: `${article.title} - The Citizen`,
 		description: article.dek || article.title,
 		authors: article.authors.map((slug) => ({ name: getAuthorName(slug) })),
 		openGraph: {
@@ -73,68 +71,46 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 		<>
 			<ReadProgress />
 			<article className="min-h-screen">
-				<div className="border-b">
-					<div className="container mx-auto px-6 py-4">
-						<Button variant="ghost" size="sm" asChild>
-							<Link href="/">
-								<ChevronLeft className="w-4 h-4" />
-								Back
-							</Link>
-						</Button>
-					</div>
-				</div>
-
-				<header className="border-b bg-muted/20">
-					<div className="container mx-auto px-6 py-8 md:py-16 max-w-4xl">
+				<header className="border-b">
+					<div className="container mx-auto px-6 py-8 md:py-12 max-w-3xl text-center">
 						{article.category && (
-							<div className="mb-4">
+							<div className="mb-6">
 								<Badge
 									variant="outline"
-									className="uppercase text-xs font-semibold"
+									className="uppercase text-xs font-light tracking-wide"
 									asChild
 								>
 									<Link href={`/categories/${article.category}`}>
 										{article.category}
 									</Link>
 								</Badge>
-								{article.subcategory && (
-									<>
-										<span className="mx-2 text-muted-foreground">/</span>
-										<Badge
-											variant="outline"
-											className="uppercase text-xs font-semibold"
-										>
-											{article.subcategory}
-										</Badge>
-									</>
-								)}
 							</div>
 						)}
 
-						<h1 className="text-3xl md:text-6xl font-serif font-bold mb-6 leading-tight">
+						<h1 className="text-3xl md:text-5xl font-serif font-medium mb-6 leading-tight">
 							{article.title}
 						</h1>
 
 						{article.dek && (
-							<p className="text-lg md:text-2xl text-muted-foreground mb-8 leading-relaxed">
+							<p className="text-base md:text-xl text-muted-foreground mb-8 leading-relaxed font-light">
 								{article.dek}
 							</p>
 						)}
 
-						<div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground mb-6">
-							<span>By</span>
+						<div className="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground mb-6">
+							<span className="font-light">By</span>
 							{article.authors.map((author, index) => (
 								<Link
 									key={author}
 									href={`/authors/${author}`}
-									className="font-medium text-foreground hover:text-muted-foreground transition-colors"
+									className="font-light hover:text-primary transition-colors"
 								>
 									{getAuthorName(author)}
 									{index < article.authors.length - 1 && ','}
 								</Link>
 							))}
 							<span>·</span>
-							<time>
+							<time className="font-light">
 								{new Date(article.date).toLocaleDateString('en-US', {
 									month: 'long',
 									day: 'numeric',
@@ -144,7 +120,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 							{article.estimatedReadTime && (
 								<>
 									<span>·</span>
-									<span className="flex items-center gap-1">
+									<span className="flex items-center gap-1 font-light">
 										<Clock className="w-4 h-4" />
 										{article.estimatedReadTime} min
 									</span>
@@ -156,21 +132,21 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 					</div>
 				</header>
 
-				<div className="container mx-auto px-6 py-8 md:py-12 max-w-4xl">
+				<div className="container mx-auto px-6 py-8 md:py-12 max-w-3xl">
 					{article.featuredImage && (
-						<figure className="mb-12">
-							<div className="relative w-full aspect-video overflow-hidden rounded">
+						<figure className="mb-12 -mx-6 md:mx-0">
+							<div className="relative w-full aspect-video overflow-hidden md:rounded">
 								<Image
 									src={article.featuredImage}
 									alt={article.featuredImageCaption || article.title}
 									fill
 									className="object-cover"
 									priority
-									sizes="896px"
+									sizes="(max-width: 768px) 100vw, 768px"
 								/>
 							</div>
 							{(article.featuredImageCaption || article.featuredImageCredit) && (
-								<figcaption className="mt-4 text-sm text-muted-foreground">
+								<figcaption className="mt-4 text-sm text-muted-foreground text-center font-light px-6 md:px-0">
 									{article.featuredImageCaption}
 									{article.featuredImageCredit && (
 										<span className="ml-2 italic">
@@ -187,60 +163,47 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 					</div>
 
 					{article.tags && article.tags.length > 0 && (
-						<div className="flex flex-wrap items-center gap-2 mb-12">
-							<span className="text-sm font-medium">Tags:</span>
+						<div className="flex flex-wrap items-center justify-center gap-2 mb-12">
 							{article.tags.map((tag) => (
-								<Badge key={tag} variant="secondary" asChild>
+								<Badge
+									key={tag}
+									variant="outline"
+									className="uppercase text-xs font-light tracking-wide"
+									asChild
+								>
 									<Link href={`/tags/${tag}`}>{tag}</Link>
 								</Badge>
 							))}
 						</div>
 					)}
 
-					<NewsletterSignup />
+					<Separator className="my-12" />
 
 					<RelatedArticles currentArticle={article} allArticles={sortedArticles} />
 
 					<Separator className="my-12" />
 
-					<nav className="flex flex-col md:flex-row gap-4">
+					<nav className="flex items-center justify-center gap-4 text-sm">
 						{prevArticle && (
-							<Button
-								variant="outline"
-								asChild
-								className="flex-1 h-auto p-4 justify-start"
+							<Link
+								href={prevArticle.url}
+								className="flex items-center gap-2 hover:text-primary transition-colors font-light"
 							>
-								<Link href={prevArticle.url} className="flex items-start gap-3">
-									<ChevronLeft className="w-4 h-4 mt-1 shrink-0" />
-									<div className="text-left">
-										<div className="text-xs text-muted-foreground mb-1">
-											Previous
-										</div>
-										<div className="font-semibold line-clamp-2">
-											{prevArticle.title}
-										</div>
-									</div>
-								</Link>
-							</Button>
+								<ChevronLeft className="w-4 h-4" />
+								Previous
+							</Link>
+						)}
+						{prevArticle && nextArticle && (
+							<span className="text-muted-foreground">·</span>
 						)}
 						{nextArticle && (
-							<Button
-								variant="outline"
-								asChild
-								className="flex-1 h-auto p-4 justify-end md:ml-auto"
+							<Link
+								href={nextArticle.url}
+								className="flex items-center gap-2 hover:text-primary transition-colors font-light"
 							>
-								<Link href={nextArticle.url} className="flex items-start gap-3">
-									<div className="text-right">
-										<div className="text-xs text-muted-foreground mb-1">
-											Next
-										</div>
-										<div className="font-semibold line-clamp-2">
-											{nextArticle.title}
-										</div>
-									</div>
-									<ChevronRight className="w-4 h-4 mt-1 shrink-0" />
-								</Link>
-							</Button>
+								Next
+								<ChevronRight className="w-4 h-4" />
+							</Link>
 						)}
 					</nav>
 				</div>

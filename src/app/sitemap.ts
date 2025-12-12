@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { allArticles, allAuthors, allCategories } from 'contentlayer/generated'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-	const baseUrl = 'https://welchdaily.com'
+	const baseUrl = 'https://thecitizen.example' // Update with your production domain
 
 	const articles = allArticles
 		.filter((article) => article.status === 'published')
@@ -45,4 +45,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		...categories,
 	]
 }
-

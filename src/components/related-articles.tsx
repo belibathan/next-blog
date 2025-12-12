@@ -25,12 +25,14 @@ export function RelatedArticles({ currentArticle, allArticles }: RelatedArticles
 	if (related.length === 0) return null
 
 	return (
-		<section className="border-t pt-12">
-			<h2 className="text-2xl md:text-3xl font-serif font-bold mb-8">Related Articles</h2>
+		<section className="py-8">
+			<h2 className="text-xl md:text-2xl font-serif font-medium mb-8 text-center">
+				Related Articles
+			</h2>
 			<div className="grid md:grid-cols-3 gap-8">
 				{related.map((article) => (
 					<article key={article._id} className="group">
-						<Link href={article.url} className="block">
+						<Link href={article.url} className="block space-y-3">
 							{article.featuredImage && (
 								<div className="relative w-full aspect-video mb-4 overflow-hidden rounded">
 									<Image
@@ -45,25 +47,20 @@ export function RelatedArticles({ currentArticle, allArticles }: RelatedArticles
 							{article.category && (
 								<Badge
 									variant="outline"
-									className="uppercase text-xs font-semibold mb-3"
+									className="uppercase text-xs font-light tracking-wide"
 								>
 									{article.category}
 								</Badge>
 							)}
-							<h3 className="text-lg font-serif font-bold mb-2 leading-tight group-hover:text-muted-foreground transition-colors">
+							<h3 className="text-lg font-serif font-medium leading-tight group-hover:text-primary transition-colors">
 								{article.title}
 							</h3>
-							{article.dek && (
-								<p className="text-sm text-muted-foreground line-clamp-2 mb-3">
-									{article.dek}
-								</p>
-							)}
-							<div className="flex items-center gap-2 text-sm text-muted-foreground">
-								<span className="font-medium text-foreground">
+							<div className="flex items-center gap-2 text-xs text-muted-foreground">
+								<span className="font-light">
 									{getAuthorName(article.authors[0])}
 								</span>
 								<span>·</span>
-								<time>
+								<time className="font-light">
 									{new Date(article.date).toLocaleDateString('en-US', {
 										month: 'short',
 										day: 'numeric',

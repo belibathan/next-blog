@@ -1,422 +1,331 @@
-# Welch Daily
+# The Citizen
 
-A modern, professional news publication platform built with Next.js, Contentlayer, and shadcn/ui.
+A modern, minimal news publication platform built with Next.js, Contentlayer, and Tailwind CSS.
 
-## About
+**Tagline:** Independent journalism that informs and empowers.
 
-**Welch Daily** delivers independent journalism that informs and empowers readers. Built with modern web technologies for fast performance, beautiful design, and easy content management.
+---
 
-## Tech Stack
+## 🚀 Quick Start
 
--   **Framework**: Next.js 16
--   **Content**: Contentlayer (MDX)
--   **Styling**: Tailwind CSS v4
--   **UI Components**: shadcn/ui
--   **Typography**: Inter + Playfair Display
--   **Package Manager**: pnpm
+### Prerequisites
 
-## Getting Started
+-   Node.js 18+
+-   pnpm (recommended)
 
 ### Installation
 
-1. Install dependencies:
-
 ```bash
+# Install dependencies
 pnpm install
-```
 
-2. Run development server:
-
-```bash
+# Run development server
 pnpm dev
-```
 
-3. Open [http://localhost:3000](http://localhost:3000)
-
-### Building for Production
-
-```bash
+# Build for production
 pnpm build
 pnpm start
 ```
 
+Open [http://localhost:3000](http://localhost:3000) to view the site.
+
 ---
 
-## 📝 Content Management Guide
+## 📚 Documentation
 
-This guide will show you how to add and manage content on your news site.
+### For Content Editors
 
-### Understanding the Content Structure
+→ **[Content Management Guide](./docs/CONTENT-MANAGEMENT.md)**
 
-All content lives in the `content/` folder with three main types:
+-   How to create and manage articles
+-   Working with authors and categories
+-   Understanding Contentlayer
+-   Publishing workflow
+
+### For Developers
+
+→ **[Styling Guide](./docs/STYLING.md)**
+
+-   Design system overview
+-   Typography and colors
+-   Component patterns
+-   Responsive design
+-   Customization guide
+
+---
+
+## 🛠 Tech Stack
+
+**Framework & Core**
+
+-   [Next.js 16](https://nextjs.org/) - React framework with App Router
+-   [React 19](https://react.dev/) - UI library
+-   [TypeScript 5](https://www.typescriptlang.org/) - Type safety
+
+**Content & Styling**
+
+-   [Contentlayer](https://contentlayer.dev/) - Type-safe MDX content management
+-   [Tailwind CSS v4](https://tailwindcss.com/) - Utility-first styling
+-   [shadcn/ui](https://ui.shadcn.com/) - Component library
+
+**Fonts**
+
+-   [Markazi Text](https://fonts.google.com/specimen/Markazi+Text) - Serif (headlines)
+-   [Fira Sans](https://fonts.google.com/specimen/Fira+Sans) - Sans-serif (body)
+
+**Package Manager**
+
+-   [pnpm](https://pnpm.io/) - Fast, disk space efficient
+
+---
+
+## 📁 Project Structure
 
 ```
-content/
-├── articles/     ← Your news articles
-├── authors/      ← Writer profiles
-└── categories/   ← Content sections (Politics, Business, etc.)
-```
-
----
-
-## 📰 How to Add a New Article
-
-### Step 1: Create the File
-
-1. Go to the `content/articles/` folder
-2. Create a new file with this naming format: `YYYY-MM-DD-article-name.mdx`
-    - Example: `2025-12-15-new-budget-announced.mdx`
-
-### Step 2: Add Article Information (Frontmatter)
-
-At the top of your file, add this information between the `---` markers:
-
-```yaml
----
-title: 'City Announces New Budget for 2026'
-slug: 'new-budget-announced'
-date: '2025-12-15'
-category: 'politics'
-subcategory: 'local-government'
-dek: 'The city council approved a $2.5 billion budget focusing on infrastructure and education.'
-authors: ['john-smith']
-tags: ['budget', 'city-council', 'local-government']
-featuredImage: 'https://images.unsplash.com/photo-example.jpg'
-featuredImageCaption: 'City Hall during the budget announcement'
-featuredImageCredit: 'Photo by Jane Doe'
-status: 'published'
----
-```
-
-### Understanding Each Field:
-
-| Field                  | Required? | Description                   | Example                      |
-| ---------------------- | --------- | ----------------------------- | ---------------------------- |
-| `title`                | ✅ Yes    | Article headline              | `'Breaking: New Park Opens'` |
-| `slug`                 | ✅ Yes    | URL-friendly name (no spaces) | `'new-park-opens'`           |
-| `date`                 | ✅ Yes    | Publication date (YYYY-MM-DD) | `'2025-12-15'`               |
-| `category`             | ✅ Yes    | Main category slug            | `'local'` or `'politics'`    |
-| `subcategory`          | ❌ No     | Optional sub-category         | `'environment'`              |
-| `dek`                  | ❌ No     | Short description/subtitle    | `'A brief summary...'`       |
-| `authors`              | ✅ Yes    | List of author slugs          | `['john-smith']`             |
-| `tags`                 | ❌ No     | Keywords for the article      | `['parks', 'community']`     |
-| `featuredImage`        | ❌ No     | Main article image URL        | Full URL to image            |
-| `featuredImageCaption` | ❌ No     | Image description             | `'View of the new park'`     |
-| `featuredImageCredit`  | ❌ No     | Photographer credit           | `'Photo by John Doe'`        |
-| `status`               | ✅ Yes    | `'published'` or `'draft'`    | `'published'`                |
-
-### Step 3: Write Your Article Content
-
-After the closing `---`, write your article using Markdown:
-
-```markdown
----
-(frontmatter goes here)
----
-
-This is the first paragraph of your article. You can write normally here.
-
-## This is a Section Heading
-
-Here's another paragraph with **bold text** and _italic text_.
-
-### Subsection
-
-You can add:
-
--   Bullet points
--   Like this
-
-Or numbered lists:
-
-1. First item
-2. Second item
-
-> This is a quote or callout
-
-[This is a link](https://example.com)
-```
-
-### Step 4: Save and Preview
-
-1. Save the file
-2. The site will automatically update
-3. Visit `http://localhost:3000` to see your article
-
-**Note**: Only articles with `status: 'published'` will appear on the site. Use `status: 'draft'` while writing.
-
----
-
-## 👤 How to Add a New Author
-
-### Step 1: Create Author File
-
-1. Go to `content/authors/` folder
-2. Create a file named: `firstname-lastname.mdx`
-    - Example: `john-smith.mdx`
-
-### Step 2: Add Author Information
-
-```yaml
----
-name: 'John Smith'
-slug: 'john-smith'
-role: 'Senior Reporter'
-bio: 'John is an award-winning journalist with 10 years of experience covering local politics and community issues.'
-avatar: 'https://images.unsplash.com/photo-example.jpg'
-twitter: '@johnsmith'
----
-```
-
-### Understanding Author Fields:
-
-| Field     | Required? | Description                                                   |
-| --------- | --------- | ------------------------------------------------------------- |
-| `name`    | ✅ Yes    | Author's full name                                            |
-| `slug`    | ✅ Yes    | URL-friendly identifier (must match what you use in articles) |
-| `role`    | ❌ No     | Job title or position                                         |
-| `bio`     | ❌ No     | Short biography                                               |
-| `avatar`  | ❌ No     | Profile photo URL                                             |
-| `twitter` | ❌ No     | Twitter handle                                                |
-
-### Step 3: Reference in Articles
-
-When creating articles, use the author's `slug` in the `authors` field:
-
-```yaml
-authors: ['john-smith']
-```
-
-For multiple authors:
-
-```yaml
-authors: ['john-smith', 'jane-doe']
+next-blog/
+├── content/                    # Content files (MDX)
+│   ├── articles/              # Blog articles
+│   ├── authors/               # Author profiles
+│   └── categories/            # Category definitions
+├── docs/                      # Documentation
+│   ├── CONTENT-MANAGEMENT.md  # Content guide
+│   └── STYLING.md             # Styling guide
+├── public/                    # Static assets
+├── src/
+│   ├── app/                   # Next.js app directory
+│   │   ├── layout.tsx         # Root layout (fonts)
+│   │   ├── globals.css        # Global styles & design system
+│   │   ├── page.tsx           # Homepage
+│   │   ├── articles/          # Article pages
+│   │   ├── authors/           # Author pages
+│   │   ├── categories/        # Category pages
+│   │   └── archive/           # Archive page
+│   ├── components/            # React components
+│   │   ├── layout/            # Header, footer
+│   │   ├── mdx/               # MDX components
+│   │   └── ui/                # UI components (shadcn)
+│   └── lib/                   # Utilities
+├── contentlayer.config.ts     # Contentlayer schema
+├── next.config.ts             # Next.js configuration
+├── tailwind.config.ts         # Tailwind configuration
+└── tsconfig.json              # TypeScript configuration
 ```
 
 ---
 
-## 📂 How to Add a New Category
+## 🎨 Design Philosophy
 
-### Step 1: Create Category File
+**Minimal & Editorial**
 
-1. Go to `content/categories/` folder
-2. Create a file named: `category-name.mdx`
-    - Example: `sports.mdx`
+-   Center-oriented layouts
+-   Generous white space
+-   Lightweight typography
+-   Restrained animations
+-   Institutional credibility
 
-### Step 2: Add Category Information
+**Responsive First**
 
-```yaml
----
-name: 'Sports'
-slug: 'sports'
-description: 'Coverage of local and national sports, games, and athletic events.'
----
-```
+-   Mobile-optimized layouts
+-   Progressive enhancement
+-   Varied card designs per viewport
 
-### Understanding Category Fields:
+**Content Focused**
 
-| Field         | Required? | Description                                                   |
-| ------------- | --------- | ------------------------------------------------------------- |
-| `name`        | ✅ Yes    | Category display name                                         |
-| `slug`        | ✅ Yes    | URL-friendly identifier (must match what you use in articles) |
-| `description` | ❌ No     | Brief description of what this category covers                |
-
-### Existing Categories
-
-The site comes with these categories:
-
--   **Business** - Business news and economic developments
--   **Culture** - Arts, entertainment, and lifestyle
--   **Local** - Local events and community issues
--   **Opinion** - Editorial perspectives and commentary
--   **Politics** - Political developments and policy
--   **Technology** - Technology trends and innovation
-
-### Step 3: Use in Articles
-
-Reference the category `slug` in your articles:
-
-```yaml
-category: 'sports'
-```
+-   Clean reading experience
+-   Type-safe content management
+-   Fast page loads
+-   SEO optimized
 
 ---
 
-## 🖼️ Working with Images
+## 📝 Available Scripts
 
-### Using External Images (Recommended)
+```bash
+# Development
+pnpm dev              # Start dev server (http://localhost:3000)
+pnpm dev --turbo      # Start with Turbopack (faster)
 
-Use image hosting services like:
+# Production
+pnpm build            # Build for production
+pnpm start            # Start production server
 
--   **Unsplash** - Free stock photos
--   **Cloudinary** - Image hosting
--   **Your own server** - Upload to your web server
+# Code Quality
+pnpm lint             # Run ESLint
+pnpm type-check       # Run TypeScript type checking
 
-Get the full URL and paste it:
-
-```yaml
-featuredImage: 'https://images.unsplash.com/photo-1234567890'
-```
-
-### Image Requirements
-
--   **Format**: JPG, PNG, or WebP
--   **Size**: Recommended 1200px wide or larger
--   **Aspect Ratio**: 16:9 works best (landscape)
-
----
-
-## 📋 Content Checklist
-
-Before publishing an article, make sure:
-
--   [ ] Title is compelling and accurate
--   [ ] Slug is URL-friendly (no spaces, lowercase)
--   [ ] Date is correct
--   [ ] Category exists in `content/categories/`
--   [ ] Author exists in `content/authors/`
--   [ ] Featured image loads properly
--   [ ] Article content is proofread
--   [ ] Status is set to `'published'`
-
----
-
-## 🔧 Common Tasks
-
-### Publishing a Draft
-
-Change the status:
-
-```yaml
-status: 'draft'    ← Change this
-status: 'published' ← To this
-```
-
-### Updating an Article
-
-1. Open the article file
-2. Edit the content
-3. Update `updatedAt` field (optional):
-
-```yaml
-updatedAt: '2025-12-16'
-```
-
-### Removing an Article
-
-Either:
-
--   Delete the file from `content/articles/`
--   Or set `status: 'draft'` to hide it
-
-### Adding Multiple Authors
-
-Use a list format:
-
-```yaml
-authors: ['author-one', 'author-two', 'author-three']
+# Content
+# Contentlayer runs automatically during dev/build
+# No separate commands needed
 ```
 
 ---
 
-## 🎨 Content Guidelines
+## 🔧 Configuration
 
-### Writing Headlines
+### Environment Variables
 
--   Keep under 60 characters
--   Be specific and accurate
--   Use active voice
--   Avoid clickbait
+Create `.env.local` for local development:
 
-### Writing Deks (Subtitles)
-
--   Keep under 120 characters
--   Summarize the key point
--   Complement, don't repeat the headline
-
-### Choosing Categories
-
--   Use the most relevant primary category
--   Add subcategory for specificity
--   Be consistent across similar articles
-
-### Using Tags
-
--   3-5 tags per article
--   Use existing tags when possible
--   Lowercase, hyphenated format
--   Examples: `'city-council'`, `'climate-change'`
-
----
-
-## 🚀 Site Features
-
-Your site includes:
-
-✅ **Search** - Press `⌘K` (Mac) or `Ctrl+K` (Windows) to search
-✅ **Categories** - Browse articles by topic
-✅ **Authors** - View author profiles and their articles
-✅ **Tags** - Find articles by keyword
-✅ **Archive** - Browse all articles chronologically
-✅ **Related Articles** - Automatic suggestions at article end
-✅ **Social Sharing** - Twitter, Facebook, Email buttons
-✅ **Newsletter** - Email signup for readers
-✅ **Mobile Responsive** - Works on all devices
-
----
-
-## 📖 Quick Reference
-
-### File Naming
-
-```
-Articles:     2025-12-15-my-article.mdx
-Authors:      john-smith.mdx
-Categories:   sports.mdx
+```bash
+# Optional: Analytics, monitoring, etc.
+# NEXT_PUBLIC_SITE_URL=https://yourcitizen.com
 ```
 
-### Folder Structure
+### Images
 
-```
-content/
-├── articles/
-│   └── 2025-12-15-my-article.mdx
-├── authors/
-│   └── john-smith.mdx
-└── categories/
-    └── sports.mdx
+Configure external image hosts in `next.config.ts`:
+
+```typescript
+images: {
+  remotePatterns: [
+    { hostname: 'images.unsplash.com' },
+    // Add more as needed
+  ],
+}
 ```
 
-### URL Structure
+### Site Metadata
 
-```
-Article:   /articles/my-article
-Author:    /authors/john-smith
-Category:  /categories/sports
-Tag:       /tags/politics
-Archive:   /archive
+Update in `src/app/layout.tsx`:
+
+```typescript
+export const metadata: Metadata = {
+	title: 'The Citizen',
+	description: 'Your description here',
+}
 ```
 
 ---
 
-## 🆘 Need Help?
+## 📦 Adding Content
 
-### Common Issues
+### Quick Start
 
-**Q: My article isn't showing up**
-A: Check that `status: 'published'` and the author/category exist
+1. **Create Article**
 
-**Q: Image not loading**
-A: Verify the URL is complete and the image is publicly accessible
+    ```bash
+    # Create: content/articles/2025-12-14-your-article.mdx
+    ```
 
-**Q: Author name shows as slug**
-A: Make sure the author file exists in `content/authors/`
+2. **Add Frontmatter**
 
-**Q: How do I delete old content?**
-A: Either delete the file or change status to `'draft'`
+    ```yaml
+    ---
+    title: 'Your Article Title'
+    slug: 'your-article'
+    date: '2025-12-14'
+    category: 'technology'
+    authors: ['author-slug']
+    status: 'published'
+    ---
+    ```
+
+3. **Write Content**
+    - Use Markdown/MDX syntax
+    - Content appears automatically
+
+See [Content Management Guide](./docs/CONTENT-MANAGEMENT.md) for complete details.
 
 ---
 
-## License
+## 🎨 Customizing Styles
 
-© 2025 Welch Daily. All rights reserved.
+### Visual Color Editor
+
+Use tweakcn for live color customization:
+
+```bash
+npx tweakcn
+```
+
+### Manual Editing
+
+Edit design tokens in `src/app/globals.css`:
+
+```css
+:root {
+	--primary: 213 35% 28%; /* Brand color */
+	--secondary: /* ... */ ; /* Accent color */
+	/* ... */
+}
+```
+
+See [Styling Guide](./docs/STYLING.md) for complete details.
+
+---
+
+## 🚢 Deployment
+
+### Vercel (Recommended)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/next-blog)
+
+1. Push to GitHub
+2. Import to Vercel
+3. Deploy automatically
+
+### Other Platforms
+
+Any platform supporting Next.js:
+
+-   Netlify
+-   Railway
+-   Fly.io
+-   Self-hosted
+
+**Build Command:** `pnpm build`
+**Output Directory:** `.next`
+**Install Command:** `pnpm install`
+
+---
+
+## 🔍 SEO Features
+
+-   ✅ Dynamic sitemap generation
+-   ✅ Robots.txt configuration
+-   ✅ Open Graph metadata
+-   ✅ Twitter card support
+-   ✅ Semantic HTML structure
+-   ✅ Fast page loads (Next.js optimization)
+-   ✅ Mobile-friendly design
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+## 🆘 Support & Resources
+
+### Documentation
+
+-   [Content Management](./docs/CONTENT-MANAGEMENT.md) - Managing articles, authors, categories
+-   [Styling Guide](./docs/STYLING.md) - Design system and customization
+
+### External Resources
+
+-   [Next.js Documentation](https://nextjs.org/docs)
+-   [Contentlayer Documentation](https://contentlayer.dev)
+-   [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+-   [shadcn/ui Components](https://ui.shadcn.com)
+
+### Issues
+
+Found a bug or have a suggestion?
+[Open an issue](https://github.com/yourusername/next-blog/issues)
+
+---
+
+**Built with ❤️ for Willow Park**

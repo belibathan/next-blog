@@ -7,7 +7,6 @@ export default function robots(): MetadataRoute.Robots {
 			allow: '/',
 			disallow: '/api/',
 		},
-		sitemap: 'https://welchdaily.com/sitemap.xml',
+		sitemap: 'https://thecitizen.example/sitemap.xml', // Update with your production domain
 	}
 }
-
